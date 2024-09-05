@@ -1,0 +1,44 @@
+[tool.poetry]
+name = "blind-mouse-python"
+version = "0.1.0"
+description = "Blind Mouse maze game using Python and FastAPI"
+authors = ["PitzTech <victorlaurentino7@gmail.com>"]
+readme = "README.md"
+packages = [
+    { include = "app" }
+]
+
+[tool.poetry.scripts]
+start = "uvicorn app.main:app --reload"
+install_hooks = "poetry run pre-commit install"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.113.0"
+uvicorn = "^0.30.6"
+python-socketio = {extras = ["asyncio-client"], version = "^5.11.4"}
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.8.0"
+flake8 = "^7.1.1"
+isort = "^5.13.2"
+pytest = "^8.3.2"
+pre-commit = "^3.8.0"
+flakehell = "^0.9.0"
+
+[tool.flakehell]
+# https://flakehell.readthedocs.io/
+# https://black.readthedocs.io/en/stable/compatible_configs.html?highlight=flake8#flake8
+max-line-length = 88
+extend-ignore = "E203, W503"
+# https://github.com/flakehell/flakehell/issues/10#issuecomment-822720074
+extended_default_ignore = []  # add this
+
+[tool.isort]
+# https://pycqa.github.io/isort/docs/configuration/black_compatibility/
+profile = "black"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
